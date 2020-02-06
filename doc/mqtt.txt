@@ -1,0 +1,37 @@
+1. toggle: to toggle a relay with rid
+-> /MBS/RELAY/{DEVICE_ID} {"action":"toggle", "rid":"{RID}"}
+<- N/A
+
+2. status: status check
+1) status: define as a status echo
+-> /MBS/RELAY/{DEVICE_ID} {"action":"status"}
+<- /MBS/RELAY/PUBLIC/STATUS/{DEVICE_ID} {"status":"ok"}
+2) relay status: relay status check
+-> /MBS/RELAY/{DEVICE_ID} {"action":"status", "module":"relay", "rid":"{RID}"}
+<- /MBS/RELAY/PUBLIC/STATUS/{DEVICE_ID}
+	{"rid":"0", "pulse_length":"%d", "pulse_interval":"%d", "cents_per_pulse":"%d"}	/* board level relay configuration with rid 0 */
+	{"rid":"{RID}", "toggle":"%d" "pulse_length":"%d", "pulse_interval":"%d", "cents_per_pulse":"%d"} /* per relay configuration */
+3) wifi status
+-> /MBS/RELAY/{DEVICE_ID} {"action":"status", "module":"wifi"}
+<- /MBS/RELAY/PUBLIC/STATUS/{DEVICE_ID} {"wifi_ssid":"{WIFI_SSID}", "wifi_password":"{WIFI_PASSWORD}"}
+
+3. upgrade: OTA upgrade
+-> /MBS/RELAY/{DEVICE_ID} {"action":"upgrade", "firmware_url":"{FIRMWARE_URL}"}
+
+4. reboot
+-> /MBS/RELAY/{DEVICE_ID} {"action":"reboot"}
+
+5. config:
+1) wifi
+-> /MBS/RELAY/{DEVICE_ID} {"action":"config", "wifi_ssid":"{WIFI_SSID}", "wifi_password":"{WIFI_PASSWORD}"}
+2) relay
+-> /MBS/RELAY/{DEVICE_ID} {"action":"config", "wifi_ssid":"{WIFI_SSID}", "wifi_password":"{WIFI_PASSWORD}"}
+-> /MBS/RELAY/{DEVICE_ID}
+	{"action":"config","relays":[{"rid":"0", "pulse_length":"100", "pulse_interval":"100", "cents_per_pulse":"50"}, {"rid":"1", "pulse_length":"150", "pulse_interval":"200", "cents_per_pulse":"80"}]}
+Note: wifi and relay configuration fields can be included in the content of one message
+
+6. reset:
+-> /MBS/RELAY/{DEVICE_ID} {"action":"reset"}	/* delete dtu.properties file and reboot */
+
+7. relay: start a relay
+-> /MBS/RELAY/{DEVICE_ID} {"action":"relay", "rid":"{RID}", "credit":"{CREDIT}"}

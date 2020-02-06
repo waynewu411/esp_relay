@@ -1,0 +1,9 @@
+V1.00.01L (2020-02-06)
+ - LinkNode基本功能
+  - Connect to circumvend WIFI
+  - Connect to MQTT server (not mqtts)
+  - OTA via current HTTP server
+  - MQTT message include: toggle/status/upgrade/reboot/config/reset/relay
+  - Add property save to and load from dtu.properties and support the save and load of wifi_ssid and wifi_password
+  - WifiManager for wifi configuration when wifi connection failed based on current wifi configuration
+  - Relay feature
