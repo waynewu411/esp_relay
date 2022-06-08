@@ -7,7 +7,7 @@ static WiFiClient wifiClient;
 static PubSubClient mqttc(wifiClient);
 
 static char *mqtt_get_server(void) {
-    return "mqtt.circumvend.com";
+    return "mqtt.server.com";
 }
 
 static int mqtt_get_port(void) {
@@ -15,11 +15,11 @@ static int mqtt_get_port(void) {
 }
 
 static char *mqtt_get_username(void) {
-    return "circumvend_mqtt_user";
+    return "mqtt_user";
 }
 
 static char *mqtt_get_password(void) {
-    return "circumvend2017#";
+    return "mqtt_password";
 }
 
 void setup_mqtt(void) {
